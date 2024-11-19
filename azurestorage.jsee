@@ -1,0 +1,25 @@
+#language = "v8"
+
+async function main() {
+	const url = 'https://httpbin.org/get';
+
+	shell.KeepRunning = true;
+	
+	let content;
+	try {
+		const response = await fetch(url);	
+		if (!response.ok) {
+			throw new Error(response.status);
+		}
+
+		content = await response.text();
+	} catch (e) {
+		alert(e);
+	}
+
+	alert('Response', content);
+	
+	shell.KeepRunning = false;
+}
+
+main();
